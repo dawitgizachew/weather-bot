@@ -1,5 +1,7 @@
+# pip install python
 # pip install bs4pip install bs4
 # pip install requests
+
 import time
 import requests_html
 import telebot
