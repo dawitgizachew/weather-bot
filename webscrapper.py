@@ -1,14 +1,16 @@
 # pip install bs4pip install bs4
 # pip install requests
+# import requests_html
 
-import requests
-from bs4 import BeautifulSoup
-url = 'https://www.timeanddate.com/weather/ethiopia/addis-ababa'
+from requests_html import HTMLSession
+url = 'https://www.google.com/search?q=weather+addis+ababa'
+s = HTMLSession()
+query = 'Addis Ababa'
+url = f'https://www.google.com/search?q=weather+{query}'
 
-page = requests.get(url)
-soup = BeautifulSoup(page.content, "html.parser")
+r = s.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'})
+temp = r.html.find('span#wob_tm', first=True).text
+unit = r.html.find('div.vk_bk.wob-unit span.wob_t', first=True). text
+desc = r.html.find('div.VQF4g', first=True).find('span#wob_dc', first=True).text
 
-post = soup.find("div", class_="bk-focus__info")
-
-title = post.find("dev", class_="h2").text.strip()
-print(title)
+print(query, temp, unit, desc)

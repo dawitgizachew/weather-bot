@@ -3,3 +3,4 @@ bs4~=0.0.2
 requests~=2.31.0
 telebot~=0.0.5
 beautifulsoup4~=4.12.3
+requests_html
